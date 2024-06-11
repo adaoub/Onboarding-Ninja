@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { List } from 'antd';
+import { Timeline, Card } from 'antd';
 import axios from 'axios';
 
 const Candidate = () => {
@@ -19,15 +19,18 @@ const Candidate = () => {
   return (
     <div className="container p-4 mx-auto">
       <h1 className="mb-4 text-2xl font-bold">Candidate Portal</h1>
-      <List
-        bordered
-        dataSource={tasks}
-        renderItem={(task) => (
-          <List.Item>
-            <strong>{task.title}:</strong> {task.desc}
-          </List.Item>
-        )}
-      />
+      <Card title="Your Onboarding Journey">
+        <Timeline mode="alternate">
+          {tasks.map((task, index) => (
+            <Timeline.Item
+              key={index}
+              color={index % 2 === 0 ? 'blue' : 'green'}
+            >
+              <strong>{task.title}:</strong> {task.desc}
+            </Timeline.Item>
+          ))}
+        </Timeline>
+      </Card>
     </div>
   );
 };
